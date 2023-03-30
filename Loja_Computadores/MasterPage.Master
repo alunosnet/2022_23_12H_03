@@ -1,0 +1,117 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MasterPage.master.cs" Inherits="Loja_Computadores.MasterPage" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <link href="/Public/css/bootstrap.css" rel="stylesheet" />
+    <link href="/Public/css/css.css" rel="stylesheet" />
+    <script src="/Public/js/bootstrap.bundle.js"></script>
+    <script src="/Public/js/codigo.js"></script>
+    <script src="/Public/js/codigo.js"></script>
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="container">
+            <!--Menu-->
+            <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top" style="z-index:2">
+                <a class="navbar-brand" href="/index.aspx">Loja PCs</a>
+                <!--menu hamburguer-->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <ul class="navbar-nav">
+                <li class="nav-item">
+                            <a class="nav-link" href="/PcPartPicker.aspx">Configurador de PC</a>
+                </li>
+                </ul>
+                <!--menu hamburguer-->
+                <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                    <ul class="navbar-nav mr-auto">
+                        <!--Menu do admin-->
+                        <% if (Session["perfil"] != null && Session["perfil"].Equals("0"))
+                            {%>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Admin/Admin.aspx">Área Admin</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Admin/Produtos/Produtos.aspx">Produtos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Admin/Users/Users.aspx">Utilizador</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Admin/Vendas/Vendas.aspx">Vendas</a>
+                        </li>
+                        <%}%>
+                        <!--Menu do utilizador-->
+                        <% if (Session["perfil"] != null && Session["perfil"].Equals("1")){%>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/User/Compras/Historico.aspx">Histórico</a>
+                        </li>
+                        <%}%>
+                        <!--Menu da homepage-->
+                        <% if (Request.Url.LocalPath.ToLower().EndsWith("index.aspx")){%>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ordenação</a>
+                                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                                    <a class="dropdown-item" href="index.aspx?ordena=1">Por Preço mais Baixo</a>
+                                    <a class="dropdown-item" href="index.aspx?ordena=2">Por Preço mais Alto</a>
+                                </div>
+                            </li>
+                            <!--<li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="dpComponentes" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Componentes</a>
+                                <div class="dropdown-menu" aria-labelledby="dpComponentes">
+                                    <a class="dropdown-item" href="index.aspx?tipo=1">Processador</a>
+                                    <a class="dropdown-item" href="index.aspx?tipo=2">Motherboard</a>
+                                    <a class="dropdown-item" href="index.aspx?tipo=3">Ram</a>
+                                    <a class="dropdown-item" href="index.aspx?tipo=4">Grafica</a>
+                                    <a class="dropdown-item" href="index.aspx?tipo=5">PSU</a>
+                                    <a class="dropdown-item" href="index.aspx?tipo=6">Armazenamento</a>
+                                    <a class="dropdown-item" href="index.aspx?tipo=7">Caixa</a>
+                                </div>
+                             </li>-->
+                        <%}%>
+                    </ul>
+                    <!--Menu login/logout-->
+                    <ul class="navbar-nav">
+                        <% if (Session["perfil"] == null){%>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login.aspx">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/registo.aspx">Registar</a>
+                        </li>
+                        <%}else{%>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/User/User.aspx"><% Response.Write(Session["nome"]); %></a>
+                        
+                            <a class="nav-link" href="/logout.aspx">Terminar Sessão</a>
+                        </li>
+                        </div>
+                        <%}%>
+                    </ul>
+                </div>
+            </nav>
+            <!--Menu-->
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+            <!--Aviso dos cookies-->
+            <div runat="server" id="div_aviso">
+                <footer class="footer">
+                    <div class="container">
+                        Este site utiliza cookies.
+                    <asp:Button runat="server" ID="bt1"
+                        CssClass="btn btn-outline-primary float-right"
+                        Text="Aceitar" 
+                        Onclick="bt1_Click"/>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
