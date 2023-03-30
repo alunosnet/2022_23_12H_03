@@ -1,0 +1,56 @@
+﻿@model IEnumerable<LojaDeReparações.Models.Reparacao>
+
+@{
+    ViewBag.Title = "Lista de Dispositivos em Espera";
+}
+
+<h2>Lista de Dispositivos em Espera</h2>
+
+<p>
+    @Html.ActionLink("Lista de Reparações", "Index") | 
+    @Html.ActionLink("Lista de reparações em curso", "ListaDeReparacoesEmCurso")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.dispositivo.Marca)
+        </th>
+        <th>
+            Funcionário
+        </th>
+        <th>
+            Cliente
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.data_inicio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.preco)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.dispositivo.Marca)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.u.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.utilizador.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.data_inicio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.preco)
+        </td>
+        <td>
+            @Html.ActionLink("Iniciar", "IniciarReparacao", new { id = item.Id })
+        </td>
+    </tr>
+}
+
+</table>

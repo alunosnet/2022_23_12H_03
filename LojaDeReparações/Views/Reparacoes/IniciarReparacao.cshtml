@@ -1,0 +1,78 @@
+﻿@model LojaDeReparações.Models.Reparacao
+
+@{
+    ViewBag.Title = "Iniciar Reparação";
+}
+
+<h2>Iniciar Reparação</h2>
+
+<div>
+    <h4>Reparação</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.dispositivo.Marca)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dispositivo.Marca)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dispositivo.Problema)
+        </dt>
+
+        <dd>
+            @Html.DisplayNameFor(model => model.dispositivo.Problema)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.u.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.u.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.utilizador.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.utilizador.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.data_inicio)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.data_inicio)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.preco)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.preco)
+        </dd>
+    </dl>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.Id);
+        @Html.HiddenFor(model => model.IdCliente);
+        @Html.HiddenFor(model => model.IdDispositivo);
+        @Html.HiddenFor(model => model.IdFuncionario);
+        @Html.HiddenFor(model => model.data_inicio);
+        @Html.HiddenFor(model => model.data_fim);
+        @Html.HiddenFor(model => model.preco);
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Iniciar" class="btn btn-default" />
+            </div>
+        </div>
+    }
+</div>
+<p>
+    @Html.ActionLink("Voltar para a Lista", "Index")
+</p>
